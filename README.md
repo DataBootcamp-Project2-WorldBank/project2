@@ -6,8 +6,13 @@ This document contains our proposal for project 2.  We will produce data visuali
 project assessments carried out by the Independent Evaluation Group (IEG), an independent unit that
 evaluated the performance of projects financed by the World Bank.  Spanning over 30 years, the collection has more than 11,300 project assessments, covering more than 9,600 completed projects; it is perhaps the longest-running and most comprehensive project performance data collection of its kind.
 
+We will use data from the [IEG WB Project Ratings](https://data.world/finance/ieg-wb-project-ratings) dataset.
 
-## Team Members (Group # 3) 
+The data is contained in a CSV file, at [IEG_World_Bank_Project_Performance_Ratings.csv]( https://data.world/finance/ieg-wb-project-ratings/file/IEG_World_Bank_Project_Performance_Ratings.csv)
+
+
+
+## Team Members (Group #2)  
 * Phillip Ogborn
 * Alciluz Gomez
 * Jose Robles
