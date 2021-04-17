@@ -20,24 +20,15 @@ The data is contained in a CSV file, at [IEG_World_Bank_Project_Performance_Rati
 
 ## Project Proposal
 
-Our project is an analysis to identify key factors that contribute to income distribution among races in the United States, by analyzing data from 2010 to 2019, inclusive. 
-
-Null Hypothesis : Median income in the United States between 2010 and 2019 is equal between the different races. 
-Alternate Hypothesis: Median income in the United States between 2010 and 2019 is not equal between the races. 
-
-We will analyze datasets from [United States Census ](https://www.census.gov/data/tables/time-series/demo/income-poverty/cps-finc.html) Current Population Survey Tables for Family Income. 
+### Sample Visualizations:
+![Screenshot 4](./Images/proposal_image4.PNG)
+![Screenshot 1](./Images/proposal_image1.PNG)
+![Screenshot 2](./Images/proposal_image2.PNG)
+![Screenshot 3](./Images/proposal_image3.PNG)
 
 ---
 
-The questions we will be asking the data are:
+# Sketch of the final design
+![Final Sketch](./Images/sketch.PNG)
 
-* Is race diversity a statiscally significant factor in determining the median income in the United States? 
-
-* How does marital status affect income distribution among races?
-
-* Is the education level significant in determining the median income for a race group?
-
-* Is region also a factor that can affect income distribution among races?
-
-|Year | Race | Marital Status | Education Level Achieved | Gender |  Median Income |
-|----|------|-----------------|---------------|-|-|
+# [Link to the primary GitHub repository](https://github.com/DataBootcamp-Project2-WorldBank/project2)
