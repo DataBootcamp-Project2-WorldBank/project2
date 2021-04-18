@@ -19,4 +19,4 @@ class Logon(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Logon {}>'.format(self.body)
+        return '<Logon {}>'.format(self.timestamp)
