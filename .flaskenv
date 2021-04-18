@@ -1,1 +1,2 @@
 FLASK_APP=project2.py
+FLASK_DEBUG=1
