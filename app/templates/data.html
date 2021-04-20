@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <section>
+    <div class="containertable">
+      <h1 class="title">Data</h1>
+      <h3>The following table includes all of the data used for plotting during this</h3>
+      <!-- codigo para mostrar la tabla -->
+      <iframe src="ieg_table.html"></iframe>
+    </div>
+  </section>
+    {% for post in posts %}
+  <!--  <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div> -->
+    {% endfor %}
+{% endblock %}
+
+    
