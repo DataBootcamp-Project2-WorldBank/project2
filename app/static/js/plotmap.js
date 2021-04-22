@@ -1,9 +1,19 @@
 //Create the map object
 
 var myMap = L.map("map", {
-    center : [40.7128, -74.0060], 
-    zoom: 10
+    center : [34.89, 3.87], 
+    zoom: 2
 } ); 
+
+// myMap.on("zoomend", function(e) {
+//     console.log( myMap.getZoom() );
+//     console.log( myMap.getCenter() );
+// });
+
+// myMap.on("moveend", function(e) {
+//     console.log( myMap.getCenter() );
+//     console.log( myMap.getZoom() );
+// });
 
 //Add our tile Layer
 var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
