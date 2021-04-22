@@ -1,15 +1,11 @@
 {% extends "base.html" %}
-
-
 {% block content %}
 <div class="row">
-  <div class="col py-5">
-    <img src="/static/Images/world.PNG">
-    <p> You are logged in as user : {{ current_user.username }} </p>
+  <div class="col map-container">
+     <!-- map div -->
+     <div id="map"></div>
+     <p> You are logged in as user : {{ current_user.username }} </p>
   </div>
 </div>
-    {% for post in posts %}
-  <!--  <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div> -->
-    {% endfor %}
 {% endblock %}
 
