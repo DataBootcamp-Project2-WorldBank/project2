@@ -61,7 +61,7 @@ d3.json(link).then( function(data) {
                  layer.on({
                      mouseover: function(event){
                          layer = event.target;
-                         layer = setStyle({
+                         layer.setStyle({
                              fillOpacity: 0.9
                          });
                      }, 
