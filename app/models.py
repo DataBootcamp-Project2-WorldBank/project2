@@ -28,6 +28,27 @@ class Logon(db.Model):
 
     def __repr__(self):
         return '<Logon {}>'.format(self.timestamp)
+
+class ProjectSummary(db.Model) :
+    region            = db.Column(db.String(10))
+    country_code_a2   = db.Column(db.String(10), primary_key=True)
+    country_code_a3   = db.Column(db.String(10), primary_key=True)
+    country_name      = db.Column(db.String(100))
+    total             = db.Column(db.Integer)
+    satisfactory      = db.Column(db.Integer)
+    unsatisfactory    = db.Column(db.Integer)
+    unavailable       = db.Column(db.Integer)
+
+    def __repr__(self):
+        return {  "region"          : self.region,
+                  "country_code_a2" : self.country_code_a2,
+                  "country_code_a3" : self.country_code_a3,
+                  "country_name"    : self.country_name,
+                  "total"           : self.total,
+                  "satisfactory"    : self.satisfactory,
+                  "unsatisfactory"  : self.unsatisfactory,
+                  "unavailble"      : self.unavailable 
+            }
        
         
 @login.user_loader

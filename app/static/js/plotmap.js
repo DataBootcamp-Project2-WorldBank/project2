@@ -25,19 +25,56 @@ var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
   accessToken: API_KEY
 });
 
-//Get our data
-var link = "static/data/countries.geojson";
 
-//Helper Function to assign borough color
-function colorSelect ( borough ) {
-    switch(borough) {
-        case "Brooklyn":      return "yellow";
-        case "Bronx" :        return "red";
-        case "Manhattan":     return "orange";
-        case "Staten Island": return "purple";
-        case "Queens" :       return "green";
-        default: "black";
+//Helper Function to assign country color
+function styleSelect ( country_code ) {
+   console.log("looking for color for country_code_a3 :" + country_code)
+    country_obj = country_data.find( o => o.country_code_a3 === country_code);
+    if (country_obj) { 
+        console.log("Found country: " + country_obj.country_name);
+        pct_satis = country_obj.total > 0 ? (country_obj.satisfactory/country_obj.total) * 100 : 0; 
+    }
+    else  {
+        return { color: "white", 
+                 fillColor: "white",
+                 fillOpacity: .5,
+                 weight: 1.5 
       }
+    }
+
+    if (between(pct_satis, 0,25)) {
+        return { color: "white", 
+                 fillColor: "red",
+                 fillOpacity: 1,
+                 weight: 1.5 
+               }
+    }
+    else if (between(pct_satis, 25,50)) { 
+        return { color: "white", 
+                 fillColor: "red",
+                 fillOpacity: .75,
+                 weight: 1.5 
+               }
+    }
+    else if (between(pct_satis, 50, 75)) {
+        return { color: "white", 
+                 fillColor: "red",
+                 fillOpacity: .25,
+                 weight: 1.5 
+               }
+    }
+    else {
+        return { color: "white", 
+                 fillColor: "red",
+                 fillOpacity: .05,
+                 weight: 1.5 
+      }
+    }
+
+}
+
+function between(x, min, max) {
+    return x >= min && x <= max;
 }
 // //Add our styling
 // var mapStyle = {
@@ -47,35 +84,52 @@ function colorSelect ( borough ) {
 //     weight: 1.5
 // };
 
+
+//Locations for the data
+var link = "static/data/countries.geojson";
+var stats_url = "/summary"
+
+console.log("71");
+
+country_data = [];
+d3.json(stats_url).then (function (data){
+    country_data = data;
+    console.log(country_data.length)
+});
+
+console.log("79")
 //Plot our data
+//Each country's color is based on how many satisfactory projects it had.
 d3.json(link).then( function(data) {
     L.geoJson(data,
-              {style: function(feature) { 
-                      return { color: "white", 
-                               fillColor: colorSelect(feature.properties.ADMIN),
-                               fillOpacity: .5,
-                               weight: 1.5 
-                             }
-                      },
+              {style: function(feature) {
+                      styleObj = styleSelect(feature.properties.ISO_A3);
+                      console.log (styleObj);
+                      return styleObj;
+                     },
                onEachFeature: function (feature, layer) {
+                   console.log(layer);
                  layer.on({
                      mouseover: function(event){
                          layer = event.target;
-                         layer.setStyle({
-                             fillOpacity: 0.9
-                         });
+                        //  layer.setStyle({
+                        //      fillOpacity: 0.9
+                        //  });
+                         this.openPopup();
                      }, 
                      mouseout: function(event){
                           layer = event.target;
-                          layer.setStyle({
-                              fillOpacity: 0.5
-                          });
+                        //   layer.setStyle({
+                        //       fillOpacity: 0.5
+                        //   });
+                          this.closePopup();
                      },
                      click: function(event) {
                          myMap.fitBounds( event.target.getBounds() );
                      }
                  });
-                 layer.bindPopup(`<h1>${feature.properties.ADMIN}</h1>`)
+               
+                 layer.bindTooltip(`${feature.properties.ADMIN}`)
                 }
             }).addTo(myMap);
 });
