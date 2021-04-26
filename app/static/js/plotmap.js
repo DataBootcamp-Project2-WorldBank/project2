@@ -42,7 +42,7 @@ function styleSelect ( country_code ) {
       }
     }
 
-    if (between(pct_satis, 0,25)) {
+    if (between(pct_satis, 1,25)) {
         return { color: "white", 
                  fillColor: "red",
                  fillOpacity: 1,
@@ -63,15 +63,38 @@ function styleSelect ( country_code ) {
                  weight: 1.5 
                }
     }
-    else {
+    else if (between(pct_satis, 75, 100)) {
         return { color: "white", 
                  fillColor: "red",
+                 fillOpacity: .1,
+                 weight: 1.5 
+               }
+    }
+    else {
+        return { color: "white", 
+                 fillColor: "rose",
                  fillOpacity: .05,
                  weight: 1.5 
       }
     }
 
 }
+
+function getTooltipHTML ( country_code ) {
+    console.log("looking for color for country_code_a3 :" + country_code)
+     country_obj = country_data.find( o => o.country_code_a3 === country_code);
+     if (country_obj) { 
+         console.log("Found country: " + country_obj.country_name);
+         pct_satis = country_obj.total > 0 ? (country_obj.satisfactory/country_obj.total) * 100 : 0; 
+         pct_satis = Math.round(pct_satis);
+         return country_obj.total > 0 ? `<div class="text-center">${country_obj.country_name}</div><hr><p>${pct_satis} % satisfactory</p>` :  
+                                        `<div class="text-center">${country_obj.country_name}</div><hr><p>No Project Information</p>`
+     }
+     else  {
+         return "<p>No Information Available</p>"
+     }
+ 
+ }
 
 function between(x, min, max) {
     return x >= min && x <= max;
@@ -89,15 +112,12 @@ function between(x, min, max) {
 var link = "static/data/countries.geojson";
 var stats_url = "/summary"
 
-console.log("71");
-
 country_data = [];
 d3.json(stats_url).then (function (data){
     country_data = data;
-    console.log(country_data.length)
+    console.log(country_data.length + " countries found.")
 });
 
-console.log("79")
 //Plot our data
 //Each country's color is based on how many satisfactory projects it had.
 d3.json(link).then( function(data) {
@@ -129,7 +149,7 @@ d3.json(link).then( function(data) {
                      }
                  });
                
-                 layer.bindTooltip(`${feature.properties.ADMIN}`)
+                 layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
                 }
             }).addTo(myMap);
 });
