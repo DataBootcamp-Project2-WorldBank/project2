@@ -9,7 +9,7 @@ from flask import render_template, flash, redirect, url_for, request, Flask, jso
 from werkzeug.urls import url_parse
 from app import app
 from app.forms import LoginForm
-from app.models import User, ProjectSummary
+from app.models import User, ProjectSummary, ProjectPerformanceRatings
 from flask_login import current_user, login_user, logout_user, login_required
 import sys
 
@@ -58,7 +58,7 @@ def logout():
 
 #/******************************************************************************/
 
-@app.route("/summary")
+@app.route("/api/v1.0/summary")
 def summary():
     results = ProjectSummary.query.all()
     response = []
@@ -74,5 +74,30 @@ def summary():
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
         response.append(record_dict)
+
+    return jsonify(response)
+
+#******************************************************************************/
+@app.route("/api/v1.0/project/<country_code>")
+def getProjects(country_code):
+    response = []
+    #Find the 2 letter country code that matches the passed country_code (3-letter).
+    project_summary_record = ProjectSummary.query.filter_by(country_code_a3=country_code).first()
+    if (project_summary_record):
+        country_code_a2 = project_summary_record.country_code_a2
+        canonalized = country_code_a2.upper()   
+        if(canonalized):
+            results =  ProjectPerformanceRatings.query.filter_by(country_code=canonalized).all()
+            response = [] 
+            for rec in results:
+                record_dict                      = {}
+                record_dict["project_id"]        = rec.project_id
+                record_dict["project_name"]      = rec.project_name
+                record_dict["region"]            = rec.region
+                record_dict["country_code"]      = rec.country_code
+                record_dict["country_name"]      = rec.country_name
+                record_dict["project_cost"]      = rec.project_cost
+                record_dict["IEG_outcome"]       = rec.IEG_outcome
+                response.append(record_dict)
 
     return jsonify(response)

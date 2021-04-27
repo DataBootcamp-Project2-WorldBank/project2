@@ -25,18 +25,22 @@ var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
   accessToken: API_KEY
 });
 
+var stripes = new L.StripePattern();
+stripes.addTo(myMap);
+
 
 //Helper Function to assign country color
 function styleSelect ( country_code ) {
-   console.log("looking for color for country_code_a3 :" + country_code)
+  // console.log("looking for color for country_code_a3 :" + country_code)
     country_obj = country_data.find( o => o.country_code_a3 === country_code);
     if (country_obj) { 
-        console.log("Found country: " + country_obj.country_name);
+        //console.log("Found country: " + country_obj.country_name);
         pct_satis = country_obj.total > 0 ? (country_obj.satisfactory/country_obj.total) * 100 : 0; 
     }
     else  {
         return { color: "white", 
                  fillColor: "white",
+                 fillPattern : stripes,
                  fillOpacity: .5,
                  weight: 1.5 
       }
@@ -70,10 +74,11 @@ function styleSelect ( country_code ) {
                  weight: 1.5 
                }
     }
-    else {
+    else { //No project data or no information avaialable
         return { color: "white", 
                  fillColor: "rose",
                  fillOpacity: .05,
+                 fillPattern : stripes,
                  weight: 1.5 
       }
     }
@@ -81,10 +86,10 @@ function styleSelect ( country_code ) {
 }
 
 function getTooltipHTML ( country_code ) {
-    console.log("looking for color for country_code_a3 :" + country_code)
+    //console.log("looking for color for country_code_a3 :" + country_code)
      country_obj = country_data.find( o => o.country_code_a3 === country_code);
      if (country_obj) { 
-         console.log("Found country: " + country_obj.country_name);
+         //console.log("Found country: " + country_obj.country_name);
          pct_satis = country_obj.total > 0 ? (country_obj.satisfactory/country_obj.total) * 100 : 0; 
          pct_satis = Math.round(pct_satis);
          return country_obj.total > 0 ? `<div class="text-center">${country_obj.country_name}</div><hr><p>${pct_satis} % satisfactory</p>` :  
@@ -93,7 +98,39 @@ function getTooltipHTML ( country_code ) {
      else  {
          return "<p>No Information Available</p>"
      }
- 
+ }
+
+ function showTable( country_code ) {
+     //Shows the project-table class table with data from API
+    let url = `/api/v1.0/project/${country_code}`
+
+    console.log("Calling showTable with" + url)
+
+    d3.select(".dataTable-wrapper").remove();
+    let table = d3.select(".table-div").append("table").attr("class", "projects-table");
+     
+    if (!table) {
+        return;
+    }
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+
+
+      if (!data.length) {
+        return
+      }
+
+      data.forEach( item => console.log(Object.values(item))); 
+
+      table = new simpleDatatables.DataTable(".projects-table", {
+        data: {
+          headings: Object.keys(data[0]),
+          data: data.map(item => Object.values(item))
+        }
+      });
+
+    })
  }
 
 function between(x, min, max) {
@@ -110,7 +147,7 @@ function between(x, min, max) {
 
 //Locations for the data
 var link = "static/data/countries.geojson";
-var stats_url = "/summary"
+var stats_url = "/api/v1.0/summary"
 
 country_data = [];
 d3.json(stats_url).then (function (data){
@@ -124,11 +161,11 @@ d3.json(link).then( function(data) {
     L.geoJson(data,
               {style: function(feature) {
                       styleObj = styleSelect(feature.properties.ISO_A3);
-                      console.log (styleObj);
+                      //console.log (styleObj);
                       return styleObj;
                      },
                onEachFeature: function (feature, layer) {
-                   console.log(layer);
+                   //console.log(layer);
                  layer.on({
                      mouseover: function(event){
                          layer = event.target;
@@ -146,6 +183,7 @@ d3.json(link).then( function(data) {
                      },
                      click: function(event) {
                          myMap.fitBounds( event.target.getBounds() );
+                         showTable(feature.properties.ISO_A3);
                      }
                  });
                
