@@ -78,3 +78,13 @@ def popdataview():
 @login_required
 def populationdata():
     return render_template('populationData.html', title='table')
+
+@app.route('/cpidataview')
+@login_required
+def cpidataview():
+    return render_template('cpiDataView.html', title='Data')
+
+@app.route('/cpidata')
+@login_required
+def cpidata():
+    return render_template('cpiData.html', title='table')
