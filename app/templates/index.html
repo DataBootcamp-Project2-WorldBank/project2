@@ -1,39 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="row">
   
-<div class="col-md-3">
-  <ul class="list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Cras justo odio
-      <span class="badge badge-primary badge-pill">14</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Dapibus ac facilisis in
-      <span class="badge badge-primary badge-pill">2</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      Morbi leo risus
-      <span class="badge badge-primary badge-pill">1</span>
-    </li>
-  </ul>
-</div>
-<div class="col-md-9">
-<div class="row">
-  <div class="col map-container">
-     <!-- map div -->
-     <div id="map"></div>
+  <div class="col-md-3">
+    <ul class="list-group">
+      <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
+      <a href="#" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+      <a href="#" class="list-group-item list-group-item-action">Population Levels</a>
+      <a href="#" class="list-group-item list-group-item-action">Corruption Index</a>
+
+    </ul>
+    <ul class="list-group mt-5">
+      <a href="#" class="list-group-item list-group-item-action active">Data Sets</a>
+      <a href="{{ url_for('iegdataview') }}" class="list-group-item list-group-item-action">Project Performance</a>
+      <a href="{{ url_for('gdpdataview') }}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+      <a href="{{ url_for('cpidataview') }}" class="list-group-item list-group-item-action">Corruption Prevention Idx</a>
+      <a href="{{ url_for('popdataview') }}" class="list-group-item list-group-item-action">Population Levels</a>
+
+    </ul>
   </div>
-  <div class="row">
-    <div class="col table-div">
-      <table class="projects-table"></table> 
+
+  <div class="col-md-9">
+    <div class="row map-row">
+      <div class="col map-container">
+        <!-- map div -->
+      <div id="map"></div>
+      </div>
     </div>
-  </div> 
-</div>
-</div>
+    <div class="row table-row">
+      <div class="col table-div">
+        <table class="projects-table"></table> 
+      </div>
+    </div> 
+  </div>
 
 </div>
-
 {% endblock %}
 
