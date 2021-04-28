@@ -56,6 +56,47 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+@app.route('/iegdataview')
+@login_required
+def iegdataview():
+    return render_template('iegDataView.html', title='Data')
+
+@app.route('/iegdata')
+@login_required
+def iegdata():
+    return render_template('iegData.html', title='table')
+
+@app.route('/gdpdataview')
+@login_required
+def gdpdataview():
+    return render_template('gdpDataView.html', title='Data')
+
+@app.route('/gdpdata')
+@login_required
+def gdpdata():
+    return render_template('gdpData.html', title='table')
+
+@app.route('/popdataview')
+@login_required
+def popdataview():
+    return render_template('popDataView.html', title='Data')
+
+@app.route('/populationdata')
+@login_required
+def populationdata():
+    return render_template('populationData.html', title='table')
+
+@app.route('/cpidataview')
+@login_required
+def cpidataview():
+    return render_template('cpiDataView.html', title='Data')
+
+@app.route('/cpidata')
+@login_required
+def cpidata():
+    return render_template('cpiData.html', title='table')
+
 #/******************************************************************************/
 
 @app.route("/api/v1.0/summary")
@@ -101,3 +142,4 @@ def getProjects(country_code):
                 response.append(record_dict)
 
     return jsonify(response)
+

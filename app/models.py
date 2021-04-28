@@ -28,8 +28,7 @@ class Logon(db.Model):
 
     def __repr__(self):
         return '<Logon {}>'.format(self.timestamp)
-
-
+      
 class ProjectSummary(db.Model) :
     region            = db.Column(db.String(10))
     country_code_a2   = db.Column(db.String(10), primary_key=True)
@@ -72,7 +71,7 @@ class ProjectPerformanceRatings(db.Model) :
                 "IEG_outcome"       : self.IEG_outcome
             }
 
-        
+       
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
