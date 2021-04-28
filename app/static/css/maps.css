@@ -1,0 +1,12 @@
+#map,
+html {
+  height: 100%;
+}
+
+.map-container {
+  height : 500px;
+}
+
+body {
+  padding-top: 100px;
+}
