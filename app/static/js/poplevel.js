@@ -1,3 +1,5 @@
+// Runs when user opens population_level.html.
+
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -20,24 +22,29 @@ var svg = d3.select(".chart")
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+var stats_url = "/api/v1.0/summary";
+var pop_url   = "/static/data/world-population-by-world-regions-post-1820.csv";
 // Import Data
-d3.csv("hairData.csv").then(function(hairData) {
+d3.csv(pop_url).then( function(popData) {
+  d3.json(stats_url).then( function(statsData) {
+
+    console.log(popData.length);
+    console.log(statsData.length);
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
-    hairData.forEach(function(data) {
-      data.hair_length = +data.hair_length;
-      data.num_hits = +data.num_hits;
+    popData.forEach(function(data) {
+      data.Population = +data.Population;
     });
 
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(hairData, d => d.hair_length)])
+      .domain([20, d3.max(popData, d => d.Population)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(hairData, d => d.num_hits)])
+      .domain([0, d3.max(statsData, d => d.total > 0 ? (d.satisfactory/d.total) * 100 : 0 )])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -56,12 +63,16 @@ d3.csv("hairData.csv").then(function(hairData) {
 
     // Step 5: Create Circles
     // ==============================
+
+    xvalues = popData.map( popRecord  => popRecord.Population);
+    yvalues = statsData.map( statsRec => statsRec.total > 0 ? Math.round(statsRec.satisfactory/statsRec.total) * 100 : 0  );
+
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(hairData)
+    .data(xvalues)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.hair_length))
-    .attr("cy", d => yLinearScale(d.num_hits))
+    .attr("cx", d => xLinearScale(xvalues))
+    .attr("cy", d => yLinearScale(yvalues))
     .attr("r", "15")
     .attr("fill", "pink")
     .attr("opacity", ".5");
@@ -72,12 +83,12 @@ d3.csv("hairData.csv").then(function(hairData) {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.rockband}<br>Hair length: ${d.hair_length}<br>Hits: ${d.num_hits}`);
+        return (`${d.Entity}<br>Population: ${d.Population}`);
       });
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    chartGroup.call(toolTip);
+    //chartGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
@@ -96,12 +107,13 @@ d3.csv("hairData.csv").then(function(hairData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Number of Billboard 100 Hits");
+      .text("Percentage Satisfactory");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
+      .text("Population");
   }).catch(function(error) {
     console.log(error);
   });
+});
