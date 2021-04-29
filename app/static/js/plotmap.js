@@ -136,29 +136,17 @@ function getTooltipHTML ( country_code ) {
 function between(x, min, max) {
     return x >= min && x <= max;
 }
-// //Add our styling
-// var mapStyle = {
-//     color: "white",
-//     fillColor: "pink",
-//     fillOpacity: .5 ,
-//     weight: 1.5
-// };
 
-
-//Locations for the data
+//Locations of the data sources
 var link = "static/data/countries.geojson";
 var stats_url = "/api/v1.0/summary"
 
-country_data = [];
-d3.json(stats_url).then (function (data){
-    country_data = data;
-    console.log(country_data.length + " countries found.")
-});
-
 //Plot our data
 //Each country's color is based on how many satisfactory projects it had.
-d3.json(link).then( function(data) {
-    L.geoJson(data,
+d3.json(stats_url).then ( function(data) {
+  country_data = data;
+  d3.json(link).then( function(data) {
+      L.geoJson(data,
               {style: function(feature) {
                       styleObj = styleSelect(feature.properties.ISO_A3);
                       //console.log (styleObj);
@@ -190,4 +178,5 @@ d3.json(link).then( function(data) {
                  layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
                 }
             }).addTo(myMap);
+  })
 });

@@ -97,6 +97,17 @@ def cpidataview():
 def cpidata():
     return render_template('cpiData.html', title='table')
 
+@app.route('/gdpanalysis')
+@login_required
+def gdpanalysis():
+    return render_template('gdp_analysis.html', title='GDP Analysis')
+
+@app.route('/poplevel')
+@login_required
+def poplevel():
+    return render_template('population_level.html', title='Population Level Analysis')
+
+
 #/******************************************************************************/
 
 @app.route("/api/v1.0/summary")
