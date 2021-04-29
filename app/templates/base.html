@@ -36,6 +36,7 @@
   </head>
 
   <body>
+         <!-- navbar -->
          <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
             <div class="container">
               <a href="{{ url_for('index') }}" class="navbar-brand">World Bank Projects Performance Analysis</a>
@@ -61,7 +62,6 @@
                 </ul>
                 {% endif %}
                 <ul class="navbar-nav ms-auto ml-auto mb-2 mb-lg-0 ">
-                  
                   <li class="nav-item">
                   {% if current_user.is_anonymous %}
                   <a class="nav-link" href="{{ url_for('login') }}">Login</a>
@@ -70,25 +70,52 @@
                   {% endif %}
                   </li>
                 </ul>
-
-               
               </div>
             </div>
           </div>
 
+      <!-- main page -->
       <div class="container">
+        <div class="row">
 
-          {% with messages = get_flashed_messages() %}
-          {% if messages %}
-          <ul>
-              {% for message in messages %}
-              <li>{{ message }}</li>
-              {% endfor %}
-          </ul>
+        <div class="col-md-3">
+          <!-- Menu Links -->
+          {% if not current_user.is_anonymous %}
+
+            <ul class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
+              <a href="{{url_for('index')}}" class="list-group-item list-group-item-action">Home</a>
+              <a href="{{url_for('gdpanalysis')}}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+              <a href="{{url_for('poplevel')}}" class="list-group-item list-group-item-action">Population Levels</a>
+              <a href="#" class="list-group-item list-group-item-action">Corruption Index</a>
+            </ul>
+            <ul class="list-group mt-5">
+              <a href="#" class="list-group-item list-group-item-action active">Data Sets</a>
+              <a href="{{ url_for('iegdataview') }}" class="list-group-item list-group-item-action">Project Performance</a>
+              <a href="{{ url_for('gdpdataview') }}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+              <a href="{{ url_for('cpidataview') }}" class="list-group-item list-group-item-action">Corruption Prevention Idx</a>
+              <a href="{{ url_for('popdataview') }}" class="list-group-item list-group-item-action">Population Levels</a>
+            </ul>
+          </div>
           {% endif %}
-          {% endwith %}
-          {% block content %}{% endblock %}
 
+          <div class="col-md-9">
+            <!-- Messages -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Main block feature -->
+            {% block content %}{% endblock %}
+          </div>
+
+          </div>
       </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
