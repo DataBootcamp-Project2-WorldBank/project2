@@ -125,6 +125,7 @@ def summary():
         record_dict["satisfactory"]   = rec.satisfactory
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
+        record_dict["avg_population"] = rec.avg_population
         response.append(record_dict)
 
     return jsonify(response)
