@@ -13,8 +13,10 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3.select(".chart")
+// If <div> exists in the DOM, create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
+if (document.getElementById("pop-chart")) {
+console.log("pop-chart in DOM");
+var svg = d3.select("#pop-chart")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -23,24 +25,24 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 var stats_url = "/api/v1.0/summary";
-var pop_url   = "/static/data/world-population-by-world-regions-post-1820.csv";
+
 // Import Data
-d3.csv(pop_url).then( function(popData) {
   d3.json(stats_url).then( function(statsData) {
 
-    console.log(popData.length);
     console.log(statsData.length);
 
-    // Step 1: Parse Data/Cast as numbers
+    // Step 1: Filter 0-project countries and
+    // Parse Data/Cast as numbers
     // ==============================
-    popData.forEach(function(data) {
-      data.Population = +data.Population;
+    statsData = statsData.filter(country=>country.total > 0);  
+    statsData.forEach(function(data) {
+      data.avg_population = +data.avg_population;
     });
 
     // Step 2: Create scale functions
     // ==============================
-    var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(popData, d => d.Population)])
+    var xLogScale = d3.scaleLog()
+      .domain([20, d3.max(statsData, d => d.avg_population)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -49,7 +51,7 @@ d3.csv(pop_url).then( function(popData) {
 
     // Step 3: Create axis functions
     // ==============================
-    var bottomAxis = d3.axisBottom(xLinearScale);
+    var bottomAxis = d3.axisBottom(xLogScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
     // Step 4: Append Axes to the chart
@@ -61,20 +63,18 @@ d3.csv(pop_url).then( function(popData) {
     chartGroup.append("g")
       .call(leftAxis);
 
+      console.log(statsData);
+
     // Step 5: Create Circles
     // ==============================
-
-    xvalues = popData.map( popRecord  => popRecord.Population);
-    yvalues = statsData.map( statsRec => statsRec.total > 0 ? Math.round(statsRec.satisfactory/statsRec.total) * 100 : 0  );
-
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(xvalues)
+    .data(statsData)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(xvalues))
-    .attr("cy", d => yLinearScale(yvalues))
-    .attr("r", "15")
-    .attr("fill", "pink")
+    .attr("cx", d => xLogScale(d.avg_population) )
+    .attr("cy", d => yLinearScale( d.total > 0 ? (d.satisfactory/d.total) * 100 :0 ))
+    .attr("r", "7")
+    .attr("fill", "red")
     .attr("opacity", ".5");
 
     // Step 6: Initialize tool tip
@@ -83,12 +83,12 @@ d3.csv(pop_url).then( function(popData) {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.Entity}<br>Population: ${d.Population}`);
+        return (`${d.country_name}<br>Avg. Population: ${Math.round(d.avg_population)}<br>% Satisfactory: ${d.total > 0 ? Math.round((d.satisfactory/d.total) * 100) : 0}`);
       });
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    //chartGroup.call(toolTip);
+    chartGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
@@ -116,4 +116,5 @@ d3.csv(pop_url).then( function(popData) {
   }).catch(function(error) {
     console.log(error);
   });
-});
+
+};
