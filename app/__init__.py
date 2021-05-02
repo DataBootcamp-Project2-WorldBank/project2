@@ -13,3 +13,6 @@ login = LoginManager(app)
 login.login_view = 'login'  # Endpoint for the login view
 
 from app import routes,models
+from .plotlydash.plot_projects import init_projectchart
+
+app = init_projectchart(app)

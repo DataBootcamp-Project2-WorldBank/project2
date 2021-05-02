@@ -88,3 +88,8 @@ def cpidataview():
 @login_required
 def cpidata():
     return render_template('cpiData.html', title='table')
+
+@app.route('/aboutproject')
+@login_required
+def aboutproject():
+    return render_template('aboutProject.html', title='About Project')

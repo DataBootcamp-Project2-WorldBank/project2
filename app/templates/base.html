@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,13 +30,13 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                  
                   <li class="nav-item">
                   {% if current_user.is_anonymous %}
                   <a class="nav-link" href="{{ url_for('login') }}">Login</a>
 
                   {% else %}
-                  <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                  <a class="nav-link" href="{{ url_for('aboutproject') }}">About Project</a>
+                  <a class="nav-link" href="/dashapp/">Project Chart</a>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,6 +48,7 @@
                         <li><a class="dropdown-item" href="{{ url_for('cpidataview') }}">CPI</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('popdataview') }}">Population</a></li>
                     </ul>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                   </li>
                   {% endif %}
                   </li>
@@ -80,4 +82,3 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
   </body>
-</html>
