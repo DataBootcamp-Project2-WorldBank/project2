@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 
-{% block content %}
+{% block app_content %}
   <section>
     <div class="containertable">
       <h1 class="title">Data</h1>
       <h3>The following table includes GDP data by country:</h3>
       <!-- codigo para mostrar la tabla -->
-        <iframe width="1000" height="700" src="{{ url_for('gdpdata') }}" frameborder="0" allowfullscreen></iframe>
+        <iframe width="1000" height="700" src="{{ url_for('main.gdpdata') }}" frameborder="0" allowfullscreen></iframe>
     </div>
   </section>
     {% for post in posts %}
