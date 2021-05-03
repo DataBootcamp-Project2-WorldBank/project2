@@ -28,7 +28,7 @@ def init_projectchart (server):
   list=project_df['country'].unique()
   list.sort()
   # Custom HTML layout
-  dash_app.index_string = html_layout
+  #dash_app.index_string = html_layout
   # ------------------------------------------------------------------------------
   # create layout
   fig = px.bar(project_df.set_index('country'), y="count", color="IEG_Outcome", title="World bank Project",height=600)

@@ -97,12 +97,11 @@ def cpidataview():
 def cpidata():
     return render_template('cpiData.html', title='table')
 
-<<<<<<< HEAD
 @app.route('/aboutproject')
 @login_required
 def aboutproject():
     return render_template('aboutProject.html', title='About Project')
-=======
+
 #/******************************************************************************/
 
 @app.route("/api/v1.0/summary")
@@ -149,4 +148,3 @@ def getProjects(country_code):
 
     return jsonify(response)
 
->>>>>>> ebfddf53f42a0ac4c7a3e0826bc24ee00efd7d2f
