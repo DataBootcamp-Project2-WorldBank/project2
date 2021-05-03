@@ -1,1 +1,1 @@
-web: gunicorn alciluz-jose-phillip-project2:app
+web: gunicorn project2:app
