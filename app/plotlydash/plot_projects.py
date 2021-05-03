@@ -32,7 +32,6 @@ def init_projectchart (server):
   # ------------------------------------------------------------------------------
   # create layout
   fig = px.bar(project_df.set_index('country'), y="count", color="IEG_Outcome", title="World bank Project",height=600)
-  jls_extract_var = id
   dash_app.layout = html.Div(children=[
     html.H1(children='Project Charts',style={'text-align': 'center'}),
     dcc.Graph(
