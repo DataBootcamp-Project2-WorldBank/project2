@@ -7,6 +7,8 @@ evaluated the performance of projects financed by the World Bank.  Spanning over
 
 You can find the Proposal document for the project [here.](https://github.com/DataBootcamp-Project2-WorldBank/project2/blob/main/Proposal.md)
 
+Download the [PDF document](project2_presentation.pdf) with the slides for the presentation given during class.
+
 # Data Story
 
 The World Bank is an international financial institution that provides loans and grants to the governments of low- and middle-income countries for the purpose of pursuing capital projects.  Their most recently stated goal is the reduction of poverty.
@@ -23,16 +25,27 @@ The data is contained in a CSV file, at [IEG_World_Bank_Project_Performance_Rati
 
 
 ## Data Sources
+|What                                      |Source            |Description                                                                                 |Size|
+|------------------------------------------|------------------|--------------------------------------------------------------------------------------------|-----|
+|World Bank Projects Performance           |Data.World        |Contains the ratings by the IEG for World Bankpr ojects since 1973.                         |4.1Mb|
+|World Gross Domestic Product Indexes      |Data.World        |Contains the values for GDP for all countries from 2010 to 2019                             |.237Mb|
+|Corruption Perception Index               |Kaggle            |Contains ratings on Corruption Prevention for all countries as reported by Transparency.org.|7.3Mb|
+|World Population Levels                   |ourworldindata.org|World Population Figures                                                                    |1.2Mb|
+|GeoJson Formatted Data for World Countries|Datahub.io        |Contains the GeoJson data used to draw the countries as features on a map.                  |23Mb|
 
 ## Libraries, Frameworks Used
+|Front-End                                                              |Middle Tier                                                    |Database                  |
+|-----------------------------------------------------------------------|---------------------------------------------------------------|--------------------------|
+|HTML, Javascript, CSS, Bootswatch (themes), Leaflet.js, D3.js, Plot.ly |Python,  Flask-SQLAlchemy, IPython (Jupiter Notebooks), Pandas |SQL, SQLite, Postgres     | 
 
-### Entity (Tables) Design
 
-### ETL Process
+## Entity (Tables) Design
 
-### Fron-End Application (User's Guide)
+## ETL Process
+
+## Fron-End Application (User's Guide)
 
 ---
 
 
-# [Link to the primary GitHub repository](https://github.com/DataBootcamp-Project2-WorldBank/project2)
+## [Link to the primary GitHub repository](https://github.com/DataBootcamp-Project2-WorldBank/project2)
