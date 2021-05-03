@@ -28,8 +28,50 @@ class Logon(db.Model):
 
     def __repr__(self):
         return '<Logon {}>'.format(self.timestamp)
+      
+class ProjectSummary(db.Model) :
+    region            = db.Column(db.String(10))
+    country_code_a2   = db.Column(db.String(10), primary_key=True)
+    country_code_a3   = db.Column(db.String(10), primary_key=True)
+    country_name      = db.Column(db.String(100))
+    total             = db.Column(db.Integer)
+    satisfactory      = db.Column(db.Integer)
+    unsatisfactory    = db.Column(db.Integer)
+    unavailable       = db.Column(db.Integer)
+
+    def __repr__(self):
+        return {  "region"          : self.region,
+                  "country_code_a2" : self.country_code_a2,
+                  "country_code_a3" : self.country_code_a3,
+                  "country_name"    : self.country_name,
+                  "total"           : self.total,
+                  "satisfactory"    : self.satisfactory,
+                  "unsatisfactory"  : self.unsatisfactory,
+                  "unavailble"      : self.unavailable 
+            }
        
-        
+
+class ProjectPerformanceRatings(db.Model) :
+        project_id        = db.Column("Project ID",   db.String(20) , primary_key=True)
+        project_name      = db.Column("Project Name", db.String(100), default="N/A")
+        region            = db.Column("Region",       db.String(3)  , default="N/A" )
+        country_code      = db.Column("Country Code" ,db.String(3)  , default="N/A", primary_key=True)
+        country_name      = db.Column("Country Name" ,db.String(100), default=0)
+        project_cost      = db.Column("Lending Project Cost", db.Integer, default=0)
+        IEG_outcome       = db.Column("IEG_Outcome", db.String     , default="N/A")
+
+        def __repr__(self):
+            return {  
+                "project_id"        : self.project_id,
+                "project_name"      : self.project_name,
+                "region"            : self.region,
+                "country_code"      : self.country_code,
+                "country_name"      : self.country_name,
+                "project_cost"      : self.project_cost,
+                "IEG_outcome"       : self.IEG_outcome
+            }
+
+       
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
