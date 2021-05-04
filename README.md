@@ -41,11 +41,22 @@ The data is contained in a CSV file, at [IEG_World_Bank_Project_Performance_Rati
 
 ## Entity (Tables) Design
 
+![ERD](./Images/erd.PNG)
+
+**corruption_perception_index**  : Contains the CPI Score for each country and year since 2010 to 2015.
+
+**dgp_per_capita**  : Contains the GDP figures for each country since 1990 until 2017
+
+**country_codes**  : Contains the ISO country codes and names.
+
+**project_performance_ratings** : Fact table with the project evaluation ratings for each country since 1948 until 2015.
+
+**world-population** : Contains world population figures since the year 1800 until 2019.
+
+**user** : Contains the list of application users.
+
 ## ETL Process
 
 ## Fron-End Application (User's Guide)
 
 ---
-
-
-## [Link to the primary GitHub repository](https://github.com/DataBootcamp-Project2-WorldBank/project2)
