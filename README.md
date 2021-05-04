@@ -56,7 +56,21 @@ The data is contained in a CSV file, at [IEG_World_Bank_Project_Performance_Rati
 **user** : Contains the list of application users.
 
 ## ETL Process
+![ETL](./Images/etl.PNG)
+
 
 ## Fron-End Application (User's Guide)
+The application has been deployed to Heroku cloud. Follow this [link](https://alciluz-jose-phillip-project2.herokuapp.com/) to acccess it.
+A sample, unpriviledged user has been created as username = rouser, password=readonly.
+After logging in the landing page will be shown:
+
+![landingpage](./Images/landing.PNG)
+
+The map shows those countries (in different shaded colors) where World Bank Projects have been evaluated by the IEG.  
+
+![hover](./Images/hover.PNG)  Hovering over the country in the map will show the ToolTip with the country name and the percentage of satisfactory outcomes for the projects implemented at that country:
+(TODO: Finish User Guide section)
+
+
 
 ---
