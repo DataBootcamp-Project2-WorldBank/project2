@@ -64,7 +64,7 @@ class ProjectPerformanceRatings(db.Model) :
         country_code      = db.Column("Country Code" ,db.String(3)  , default="N/A", primary_key=True)
         country_name      = db.Column("Country Name" ,db.String(100), default=0)
         project_cost      = db.Column("Lending Project Cost", db.Integer, default=0)
-        IEG_outcome       = db.Column("ieg_Outcome", db.String     , default="N/A")
+        IEG_outcome       = db.Column("ieg_outcome", db.String     , default="N/A")
 
         def __repr__(self):
             return {  
