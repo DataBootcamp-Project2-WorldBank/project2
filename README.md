@@ -74,8 +74,30 @@ Clicking inside a country's area will show a table below the map with the detail
 
 ![hover](./Images/zoom.PNG) 
 
-(TODO: Finish User Guide section)
+On the left side of the page, the navigational links give access to the visualizations developed in the project, and to the HTML tables with the source data used to create the visualizations. 
+
+* ```Home```  : Will take you to the home page (the main page with the map visualization).
+
+* ```Gross Domestic Product```  : Contains a visualization comparing the projects' success rate vs. the gross domestic product of the countries.
+
+* ```Population Levels``` : Contains a visualization comparing the projects' success rates vs. the average population levels for the countries. 
+
+* ```Corruption Index``` : A visualization showing how the perceived corruption index for a country relates to its projects success rates. The corruption perception index is published by [Transparency.org](https://www.transparency.org/en/cpi/2020/index/nzl)
+
+The Data Sets Menu contains these links:
+
+* ```Project Performance``` : The HTML table with the project evaluation outcome data from the IEG.
+
+* ``` Gross Domestic Product``` : HTML table with the gross domestic product figures for all countries. 
+
+* ``` Corruption Perception Index```: HTML table with the data for the Corruption Perception Index as published by transparency.org
+
+* ```Population Levels``` : HTML table with population level figures for each country . 
 
 
+## Access
+
+
+The application has been deployed to [Heroku.](https://alciluz-jose-phillip-project2.herokuapp.com/index)
 
 ---
