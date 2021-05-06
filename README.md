@@ -68,7 +68,12 @@ After logging in the landing page will be shown:
 
 The map shows those countries (in different shaded colors) where World Bank Projects have been evaluated by the IEG.  
 
-![hover](./Images/hover.PNG)  Hovering over the country in the map will show the ToolTip with the country name and the percentage of satisfactory outcomes for the projects implemented at that country:
+![hover](./Images/hover.PNG)  Hovering over the country in the map will show the ToolTip with the country name and the percentage of satisfactory outcomes for the projects implemented at that country.
+
+Clicking inside a country's area will show a table below the map with the details about the projects implemented at that country.
+
+![hover](./Images/zoom.PNG) 
+
 (TODO: Finish User Guide section)
 
 
