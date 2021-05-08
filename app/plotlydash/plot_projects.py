@@ -12,9 +12,9 @@ import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
+import dash_bootstrap_components as dbc
 def init_projectchart (server):
-  dash_app = dash.Dash(  server=server,
+  dash_app = dash.Dash( server=server,external_stylesheets=[dbc.themes.LUX],
         routes_pathname_prefix="/dashapp/")
   # ------------------------------------------------------------------------------
   # Import and clean data (importing csv into pandas)
@@ -29,10 +29,21 @@ def init_projectchart (server):
   list.sort()
   # Custom HTML layout
   #dash_app.index_string = html_layout
+  # Navbar
+  navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(dbc.NavLink("Home", href="/")),
+    ],
+    brand="World Bank Projects Performance Analysis",
+    brand_href="/index",
+    color="primary",
+    dark=True,
+   )
   # ------------------------------------------------------------------------------
   # create layout
   fig = px.bar(project_df.set_index('country'), y="count", color="IEG_Outcome", title="World bank Project",height=600)
   dash_app.layout = html.Div(children=[
+    navbar,
     html.H1(children='Project Charts',style={'text-align': 'center'}),
     dcc.Graph(
         id='bar-chart1',

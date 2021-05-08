@@ -12,6 +12,7 @@ from app.forms import LoginForm
 from app.models import User, ProjectSummary, ProjectPerformanceRatings
 from flask_login import current_user, login_user, logout_user, login_required
 import sys
+import scrape_ieg
 
 #/******************************************************************************/
 @app.route('/')
@@ -56,10 +57,10 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
 @app.route('/iegdataview')
 @login_required
 def iegdataview():
+    scrape_ieg.scrape_info()
     return render_template('iegDataView.html', title='Data')
 
 @app.route('/iegdata')
@@ -96,6 +97,16 @@ def cpidataview():
 @login_required
 def cpidata():
     return render_template('cpiData.html', title='table')
+
+@app.route('/gdpanalysis')
+@login_required
+def gdpanalysis():
+    return render_template('gdp_analysis.html', title='GDP Analysis')
+
+@app.route('/poplevel')
+@login_required
+def poplevel():
+    return render_template('population_level.html', title='Population Level Analysis')
 
 @app.route('/aboutproject')
 @login_required
