@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 
 {% block app_content %}
+
     <div class="row map-row">
       <div class="col map-container">
+
+        <div class="d-flex justify-content-center">
+          <div id="spinner" class="spinner-border" role="status">
+            <span class="sr-only">Loading Map...</span>
+          </div>
+        </div>
+
         <p>
           <small>Click on a shaded country area to display details in the 
             table below.
           </small>
         </p>
+
         <!-- map div -->
       <div id="map"></div>
       </div>

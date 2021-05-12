@@ -143,6 +143,11 @@ function between(x, min, max) {
     return x >= min && x <= max;
 }
 
+function hideSpinner() {
+  document.getElementById('spinner').style.display = 'none';
+} 
+
+
 //Locations of the data sources
 var link = "static/data/countries.geojson";
 var stats_url = "/api/v1.0/summary"
@@ -181,10 +186,18 @@ if (myMap) {
                           showTable(feature.properties.ISO_A3);
                       }
                   });
+
+                  
                 
-                  layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
+                      layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
+
+                      hideSpinner();
+
                   }
               }).addTo(myMap);
-    })
+            
+    });
+
+
   });
 }
