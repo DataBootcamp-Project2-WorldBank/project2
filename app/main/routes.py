@@ -81,6 +81,10 @@ def gdpanalysis():
 def poplevel():
     return render_template('population_level.html', title='Population Level Analysis')
 
+@bp.route('/cpi')
+@login_required
+def cpi():
+    return render_template('cpi_view.html', title='Corruption Perception Analysis')
 
 #/******************************************************************************/
 

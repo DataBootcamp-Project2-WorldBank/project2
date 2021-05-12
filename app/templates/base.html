@@ -79,28 +79,26 @@
 
        {% block content %}
           <!-- main page -->
-          <div class="container">
+          <div class="container ">
             <div class="row">
-
-            <div class="col-md-3">
               <!-- Menu Links -->
               {% if not current_user.is_anonymous %}
-
-                <ul class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
-                  <a href="{{url_for('main.index')}}" class="list-group-item list-group-item-action">Home</a>
-                  <a href="{{url_for('main.gdpanalysis')}}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
-                  <a href="{{url_for('main.poplevel')}}" class="list-group-item list-group-item-action">Population Levels</a>
-                  <a href="#" class="list-group-item list-group-item-action">Corruption Index</a>
-                </ul>
-                <ul class="list-group mt-5">
-                  <a href="#" class="list-group-item list-group-item-action active">Data Sets</a>
-                  <a href="{{ url_for('main.iegdataview') }}" class="list-group-item list-group-item-action">Project Performance</a>
-                  <a href="{{ url_for('main.gdpdataview') }}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
-                  <a href="{{ url_for('main.cpidataview') }}" class="list-group-item list-group-item-action">Corruption Prevention Idx</a>
-                  <a href="{{ url_for('main.popdataview') }}" class="list-group-item list-group-item-action">Population Levels</a>
-                </ul>
-              </div>
+                <div class="col-md-3">
+                  <ul class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
+                    <a href="{{url_for('main.index')}}" class="list-group-item list-group-item-action">Home</a>
+                    <a href="{{url_for('main.gdpanalysis')}}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+                    <a href="{{url_for('main.poplevel')}}" class="list-group-item list-group-item-action">Population Levels</a>
+                    <a href="{{url_for('main.cpi')}}" class="list-group-item list-group-item-action">Corruption Index</a>
+                  </ul>
+                  <ul class="list-group mt-5">
+                    <a href="#" class="list-group-item list-group-item-action active">Data Sets</a>
+                    <a href="{{ url_for('main.iegdataview') }}" class="list-group-item list-group-item-action">Project Performance</a>
+                    <a href="{{ url_for('main.gdpdataview') }}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
+                    <a href="{{ url_for('main.cpidataview') }}" class="list-group-item list-group-item-action">Corruption Prevention Idx</a>
+                    <a href="{{ url_for('main.popdataview') }}" class="list-group-item list-group-item-action">Population Levels</a>
+                  </ul>
+                </div>
               {% endif %}
 
               <div class="col-md-9">
@@ -117,8 +115,6 @@
 
                 <!-- Main block feature -->
                 {% block app_content %}{% endblock %}
-              </div>
-
               </div>
           </div>
           {% endblock %}
