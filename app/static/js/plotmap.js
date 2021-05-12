@@ -1,9 +1,16 @@
-//Create the map object
+//Create the map object, only if the "map" div is in the DOM
+var myMap = null;
+if (document.getElementById("map")) {
 
-var myMap = L.map("map", {
-    center : [34.89, 3.87], 
-    zoom: 2
-} ); 
+  var myMap = L.map("map", {
+      center : [34.89, 3.87], 
+      zoom: 2
+  });
+  
+  var stripes = new L.StripePattern();
+  stripes.addTo(myMap);
+
+}
 
 // myMap.on("zoomend", function(e) {
 //     console.log( myMap.getZoom() );
@@ -25,8 +32,7 @@ var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
   accessToken: API_KEY
 });
 
-var stripes = new L.StripePattern();
-stripes.addTo(myMap);
+
 
 
 //Helper Function to assign country color
@@ -136,58 +142,49 @@ function getTooltipHTML ( country_code ) {
 function between(x, min, max) {
     return x >= min && x <= max;
 }
-// //Add our styling
-// var mapStyle = {
-//     color: "white",
-//     fillColor: "pink",
-//     fillOpacity: .5 ,
-//     weight: 1.5
-// };
 
-
-//Locations for the data
+//Locations of the data sources
 var link = "static/data/countries.geojson";
 var stats_url = "/api/v1.0/summary"
 
-country_data = [];
-d3.json(stats_url).then (function (data){
-    country_data = data;
-    console.log(country_data.length + " countries found.")
-});
-
 //Plot our data
 //Each country's color is based on how many satisfactory projects it had.
-d3.json(link).then( function(data) {
-    L.geoJson(data,
-              {style: function(feature) {
-                      styleObj = styleSelect(feature.properties.ISO_A3);
-                      //console.log (styleObj);
-                      return styleObj;
-                     },
-               onEachFeature: function (feature, layer) {
-                   //console.log(layer);
-                 layer.on({
-                     mouseover: function(event){
-                         layer = event.target;
-                        //  layer.setStyle({
-                        //      fillOpacity: 0.9
-                        //  });
-                         this.openPopup();
-                     }, 
-                     mouseout: function(event){
+if (myMap) {
+  d3.json(stats_url).then ( function(data) {
+    country_data = data;
+    d3.json(link).then( function(data) {
+        L.geoJson(data,
+                {style: function(feature) {
+                        styleObj = styleSelect(feature.properties.ISO_A3);
+                        //console.log (styleObj);
+                        return styleObj;
+                      },
+                onEachFeature: function (feature, layer) {
+                    //console.log(layer);
+                  layer.on({
+                      mouseover: function(event){
                           layer = event.target;
-                        //   layer.setStyle({
-                        //       fillOpacity: 0.5
-                        //   });
-                          this.closePopup();
-                     },
-                     click: function(event) {
-                         myMap.fitBounds( event.target.getBounds() );
-                         showTable(feature.properties.ISO_A3);
-                     }
-                 });
-               
-                 layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
-                }
-            }).addTo(myMap);
-});
+                          //  layer.setStyle({
+                          //      fillOpacity: 0.9
+                          //  });
+                          this.openPopup();
+                      }, 
+                      mouseout: function(event){
+                            layer = event.target;
+                          //   layer.setStyle({
+                          //       fillOpacity: 0.5
+                          //   });
+                            this.closePopup();
+                      },
+                      click: function(event) {
+                          myMap.fitBounds( event.target.getBounds() );
+                          showTable(feature.properties.ISO_A3);
+                      }
+                  });
+                
+                  layer.bindTooltip(getTooltipHTML(feature.properties.ISO_A3));
+                  }
+              }).addTo(myMap);
+    })
+  });
+}
