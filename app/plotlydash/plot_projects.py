@@ -35,7 +35,7 @@ def init_projectchart (server):
         dbc.NavItem(dbc.NavLink("Home", href="/")),
     ],
     brand="World Bank Projects Performance Analysis",
-    brand_href="/index",
+    brand_href="/",
     color="primary",
     dark=True,
    )

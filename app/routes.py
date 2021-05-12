@@ -131,7 +131,8 @@ def summary():
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
         response.append(record_dict)
-
+        
+    print(response)
     return jsonify(response)
 
 #******************************************************************************/
