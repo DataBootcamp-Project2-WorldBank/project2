@@ -108,6 +108,11 @@ def gdpanalysis():
 def poplevel():
     return render_template('population_level.html', title='Population Level Analysis')
 
+@app.route('/cpilevel')
+@login_required
+def cpilevel():
+    return render_template('cpi_level.html', title='Corruption Index Level Analysis')
+
 @app.route('/aboutproject')
 @login_required
 def aboutproject():
@@ -131,9 +136,9 @@ def summary():
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
         record_dict["avg_population"] = rec.avg_population
+        record_dict["gdp"] = rec.gdp
+        record_dict["cpi"] = rec.cpi
         response.append(record_dict)
-        
-    print(response)
     return jsonify(response)
 
 #******************************************************************************/

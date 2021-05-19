@@ -88,15 +88,11 @@
               <a href="{{ url_for('aboutproject') }}" class="list-group-item list-group-item-action">About Project</a>
               <a href="/dashapp/" class="list-group-item list-group-item-action">Projects Chart</a>
             </ul>
-            <ul class="list-group">
+              <ul class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
-
-            <ul class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active">Analysis</a>
-              <a href="{{url_for('index')}}" class="list-group-item list-group-item-action">Home</a>
               <a href="{{url_for('gdpanalysis')}}" class="list-group-item list-group-item-action">Gross Domestic Product</a>
               <a href="{{url_for('poplevel')}}" class="list-group-item list-group-item-action">Population Levels</a>
-              <a href="#" class="list-group-item list-group-item-action">Corruption Index</a>
+              <a href="{{url_for('cpilevel')}}" class="list-group-item list-group-item-action">Corruption Index</a>
             </ul>
             <ul class="list-group mt-5">
               <a href="#" class="list-group-item list-group-item-action active">Data Sets</a>
@@ -139,6 +135,7 @@
     <!-- JS  -->
     <script type="text/javascript" src="static/js/plotmap.js"></script>
     <script type="text/javascript" src="static/js/poplevel.js"></script>
+    <script type="text/javascript" src="static/js/cpilevel.js"></script>
     <!-- D3.js -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>

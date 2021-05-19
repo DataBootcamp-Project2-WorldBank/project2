@@ -32,13 +32,14 @@ def init_projectchart (server):
   # Navbar
   navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink("Home", href="/")),
+        dbc.NavItem(dbc.NavLink("Home", href="/index")),
     ],
     brand="World Bank Projects Performance Analysis",
-    brand_href="/",
+    brand_href="/index",
     color="primary",
     dark=True,
    )
+   
   # ------------------------------------------------------------------------------
   # create layout
   fig = px.bar(project_df.set_index('country'), y="count", color="IEG_Outcome", title="World bank Project",height=600)

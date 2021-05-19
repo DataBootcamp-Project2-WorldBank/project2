@@ -39,6 +39,8 @@ class ProjectSummary(db.Model) :
     unsatisfactory    = db.Column(db.Integer)
     unavailable       = db.Column(db.Integer)
     avg_population    = db.Column(db.Integer)
+    gdp               = db.Column(db.Integer)
+    cpi               = db.Column(db.Integer)
 
     def __repr__(self):
         return {  "region"          : self.region,
@@ -49,7 +51,9 @@ class ProjectSummary(db.Model) :
                   "satisfactory"    : self.satisfactory,
                   "unsatisfactory"  : self.unsatisfactory,
                   "unavailble"      : self.unavailable, 
-                  "Avg_Population"  : self.avg_population
+                  "Avg_Population"  : self.avg_population,
+                  "GDP"             : self.gdp,
+                  "CPI"             : self.cpi
             }
        
 
