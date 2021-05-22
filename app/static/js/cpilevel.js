@@ -30,7 +30,7 @@ var stats_url = "/api/v1.0/summary";
   d3.json(stats_url).then( function(statsData) {
 
     console.log(statsData.length);
-
+   
     // Step 1: Filter 0-project countries and
     // Parse Data/Cast as numbers
     // ==============================
@@ -41,8 +41,8 @@ var stats_url = "/api/v1.0/summary";
 
     // Step 2: Create scale functions
     // ==============================
-    var xLogScale = d3.scaleLog()
-      .domain([20, d3.max(statsData, d => d.cpi)])
+    var xLogScale = d3.scaleLinear()
+      .domain([d3.min(statsData, d => d.cpi)*0.8, d3.max(statsData, d => d.cpi)*1.2])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
