@@ -113,6 +113,11 @@ def poplevel():
 def cpilevel():
     return render_template('cpi_level.html', title='Corruption Index Level Analysis')
 
+@app.route('/gdplevel')
+@login_required
+def gdplevel():
+    return render_template('gdp_level.html', title='GDP Level Analysis')
+
 @app.route('/aboutproject')
 @login_required
 def aboutproject():
