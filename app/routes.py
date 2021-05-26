@@ -12,6 +12,7 @@ from app.forms import LoginForm
 from app.models import User, ProjectSummary, ProjectPerformanceRatings
 from flask_login import current_user, login_user, logout_user, login_required
 import sys
+import scrape_ieg
 
 #/******************************************************************************/
 @app.route('/')
@@ -56,10 +57,10 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
 @app.route('/iegdataview')
 @login_required
 def iegdataview():
+    scrape_ieg.scrape_info()
     return render_template('iegDataView.html', title='Data')
 
 @app.route('/iegdata')
@@ -107,6 +108,20 @@ def gdpanalysis():
 def poplevel():
     return render_template('population_level.html', title='Population Level Analysis')
 
+@app.route('/cpilevel')
+@login_required
+def cpilevel():
+    return render_template('cpi_level.html', title='Corruption Index Level Analysis')
+
+@app.route('/gdplevel')
+@login_required
+def gdplevel():
+    return render_template('gdp_level.html', title='GDP Level Analysis')
+
+@app.route('/aboutproject')
+@login_required
+def aboutproject():
+    return render_template('aboutProject.html', title='About Project')
 
 #/******************************************************************************/
 
@@ -126,8 +141,9 @@ def summary():
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
         record_dict["avg_population"] = rec.avg_population
+        record_dict["gdp"] = rec.gdp
+        record_dict["cpi"] = rec.cpi
         response.append(record_dict)
-
     return jsonify(response)
 
 #******************************************************************************/

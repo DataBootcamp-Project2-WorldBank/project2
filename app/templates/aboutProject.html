@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <section>
+    <div class="containertable">
+      <h2 class="title">Project 2 - UCF Data Analytics and Visualization Bootcamp</h2>
+      <li>Data Bootcamp Project2 : Analysis of the World Bank Project Performance Ratings
+        This document contains our proposal for project 2. We will produce data visualizations
+        based on the project assessments carried out by the Independent Evaluation Group (IEG), 
+        an independent unit that evaluated the performance of projects financed by the World Bank. 
+        Spanning over 30 years, the collection has more than 11,300 project assessments, covering more 
+        than 9,600 completed projects; it is perhaps the longest-running and most comprehensive project 
+        performance data collection of its kind.</li>
+        <h2 class="title">Data Story</h2>
+        <li>Why are some World Bank project more successefull than others? Our work tells the story of the success rate of projects financed by the World Bank Organization, and explore several datasets to try to find why some are successful and others are not. We will compare the success rate of projects from data from the IEG WB Project Ratings with other data sets, for example the Worldwide GDP data, and see if we discover trends in the data that might explain the projects' success rates. We will also upload and analyze data from world population data set and the world corruption index, and correlate it with the projects' performance data.
+
+          The data is contained in a CSV file, at IEG_World_Bank_Project_Performance_Ratings.csv</li>
+        <h2 class="title">Team Members (Group #2)</h2>
+        <li>Phillip Ogborn</li>
+        <li> Alciluz Gomez</li>
+        <li> Jose Robles</li>
+     </div>
+     <div>
+       <ul>https://github.com/DataBootcamp-Project2-WorldBank/project2/blob/main/project2_presentation.pdf</ul>
+     </div>
+  </section>
+    {% for post in posts %}
+  <!--  <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div> -->
+    {% endfor %}
+{% endblock %}
+
+    
