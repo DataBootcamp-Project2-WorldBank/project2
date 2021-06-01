@@ -78,6 +78,13 @@ On the left side of the page, the navigational links give access to the visualiz
 
 * ```Home```  : Will take you to the home page (the main page with the map visualization).
 
+* ```About Project```  : Will show information about the project, team members.
+
+* ```Projects Chart```  : Will take you to a plotlydash page, showing charts with World bak projects information. 
+- 1st Chart dispolying numbers of charts by country and the IEG_Outcome rate. 
+- 2nd Chart show the numbers of porject of the country selected. 
+To return to home page you have to press the option home and then refresh the page.
+
 * ```Gross Domestic Product```  : Contains a visualization comparing the projects' success rate vs. the gross domestic product of the countries.
 
 * ```Population Levels``` : Contains a visualization comparing the projects' success rates vs. the average population levels for the countries. 
@@ -86,7 +93,7 @@ On the left side of the page, the navigational links give access to the visualiz
 
 The Data Sets Menu contains these links:
 
-* ```Project Performance``` : The HTML table with the project evaluation outcome data from the IEG.
+* ```Project Performance``` : The HTML table with the project evaluation outcome data from the IEG. The information of this table is scraped from the dataset web page. 
 
 * ``` Gross Domestic Product``` : HTML table with the gross domestic product figures for all countries. 
 
