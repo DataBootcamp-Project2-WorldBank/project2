@@ -11,4 +11,4 @@ Werkzeug==2.0.1
 wincertstore==0.2
 zipp==3.4.1
 gunicorn
-BeautifulSoup
+beautifulsoup4
