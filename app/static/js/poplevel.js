@@ -1,7 +1,7 @@
 // Runs when user opens population_level.html.
 
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 860;
+var svgHeight = 400;
 
 var margin = {
   top: 20,
