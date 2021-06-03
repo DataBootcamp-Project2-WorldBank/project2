@@ -18,6 +18,7 @@ from app.models import User, ProjectSummary, ProjectPerformanceRatings
 from app.main import bp
 
 import sys
+import scrape_ieg
 
 
 #/**************************************************************************
@@ -30,10 +31,10 @@ def index():
 
 #/**************************************************************************
 
-
 @bp.route('/iegdataview')
 @login_required
 def iegdataview():
+    scrape_ieg.scrape_info()
     return render_template('iegDataView.html', title='Data')
 
 @bp.route('/iegdata')
@@ -81,11 +82,20 @@ def gdpanalysis():
 def poplevel():
     return render_template('population_level.html', title='Population Level Analysis')
 
-@bp.route('/cpi')
+@bp.route('/cpilevel')
 @login_required
-def cpi():
-    return render_template('cpi_view.html', title='Corruption Perception Analysis')
+def cpilevel():
+    return render_template('cpi_level.html', title='Corruption Index Level Analysis')
 
+@bp.route('/gdplevel')
+@login_required
+def gdplevel():
+    return render_template('gdp_level.html', title='GDP Level Analysis')
+
+@bp.route('/aboutproject')
+@login_required
+def aboutproject():
+    return render_template('aboutProject.html', title='About Project')
 #/******************************************************************************/
 
 @bp.route("/api/v1.0/summary")
@@ -104,8 +114,9 @@ def summary():
         record_dict["unsatisfactory"] = rec.unsatisfactory
         record_dict["unavailable"]    = rec.unavailable
         record_dict["avg_population"] = rec.avg_population
+        record_dict["gdp"] = rec.gdp
+        record_dict["cpi"] = rec.cpi
         response.append(record_dict)
-
     return jsonify(response)
 
 #******************************************************************************/

@@ -1,7 +1,10 @@
+from app.plotlydash.plot_projects import init_projectchart
 from app import create_app, db
 from app.models import User, Logon
 
-app = create_app()
+flask_app = create_app()
+
+app = init_projectchart(flask_app)
 
 @app.shell_context_processor
 def make_shell_context():

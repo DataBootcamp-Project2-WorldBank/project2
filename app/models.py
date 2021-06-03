@@ -43,6 +43,8 @@ class ProjectSummary(db.Model) :
     unsatisfactory    = db.Column(db.Integer)
     unavailable       = db.Column(db.Integer)
     avg_population    = db.Column(db.Integer)
+    gdp               = db.Column(db.Integer)
+    cpi               = db.Column(db.Integer)
 
     def __repr__(self):
         return {  "region"          : self.region,
@@ -53,7 +55,9 @@ class ProjectSummary(db.Model) :
                   "satisfactory"    : self.satisfactory,
                   "unsatisfactory"  : self.unsatisfactory,
                   "unavailble"      : self.unavailable, 
-                  "Avg_Population"  : self.avg_population
+                  "Avg_Population"  : self.avg_population,
+                  "GDP"             : self.gdp,
+                  "CPI"             : self.cpi
             }
        
 
@@ -64,7 +68,7 @@ class ProjectPerformanceRatings(db.Model) :
         country_code      = db.Column("Country Code" ,db.String(3)  , default="N/A", primary_key=True)
         country_name      = db.Column("Country Name" ,db.String(100), default=0)
         project_cost      = db.Column("Lending Project Cost", db.Integer, default=0)
-        IEG_outcome       = db.Column("ieg_outcome", db.String     , default="N/A")
+        IEG_outcome       = db.Column("ieg_Outcome", db.String     , default="N/A")
 
         def __repr__(self):
             return {  
