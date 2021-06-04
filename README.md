@@ -107,4 +107,16 @@ The Data Sets Menu contains these links:
 
 The application has been deployed to [Heroku.](https://alciluz-jose-phillip-project2.herokuapp.com/index)
 
+
+## Requirements
+
+* pip install flask
+* pip instal flask-login
+* pip install flask-migrate
+* pip install flask-sqlalchemy
+* pip install dash
+* pip install dash-bootstrap-components
+
+
+
 ---

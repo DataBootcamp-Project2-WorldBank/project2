@@ -112,7 +112,7 @@ var stats_url = "/api/v1.0/summary";
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Corruption Index");
+      .text("Gross Domestic Product");
   }).catch(function(error) {
     console.log(error);
   });
