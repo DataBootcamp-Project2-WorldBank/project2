@@ -2,6 +2,7 @@ import sqlalchemy
 from   sqlalchemy.ext.automap import automap_base
 from   sqlalchemy.orm         import Session
 from   sqlalchemy             import create_engine, func
+import os
 
 import numpy as np
 
@@ -34,8 +35,13 @@ def index():
 @bp.route('/iegdataview')
 @login_required
 def iegdataview():
-    scrape_ieg.scrape_info()
-    return render_template('iegDataView.html', title='Data')
+    heroku_deploy = os.environ.get('HEROKU_DEPLOY')
+    if ( heroku_deploy == "N" or heroku_deploy == "n"):
+        scrape_ieg.scrape_info()
+        return render_template('iegDataView.html', title='Data')
+    else:
+        return render_template('iegData.html', title='table')
+
 
 @bp.route('/iegdata')
 @login_required
