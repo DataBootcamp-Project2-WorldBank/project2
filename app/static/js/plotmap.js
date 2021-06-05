@@ -113,6 +113,7 @@ function getTooltipHTML ( country_code ) {
     console.log("Calling showTable with" + url)
 
     d3.select(".dataTable-wrapper").remove();
+    d3.select("#welcome-text").remove();
     let table = d3.select(".table-div").append("table").attr("class", "projects-table");
      
     if (!table) {
