@@ -83,7 +83,7 @@ var stats_url = "/api/v1.0/summary";
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.country_name}<br>Corruption Prevention Idx: ${Math.round(d.cpi)}<br>% Satisfactory: ${d.total > 0 ? Math.round((d.satisfactory/d.total) * 100) : 0}`);
+        return (`${d.country_name}<br>Corruption Perception Idx: ${Math.round(d.cpi)}<br>% Satisfactory: ${d.total > 0 ? Math.round((d.satisfactory/d.total) * 100) : 0}`);
       });
 
     // Step 7: Create tooltip in the chart
@@ -112,7 +112,7 @@ var stats_url = "/api/v1.0/summary";
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Corruption Prevention Idx");
+      .text("Corruption Perception Index");
   }).catch(function(error) {
     console.log(error);
   });
