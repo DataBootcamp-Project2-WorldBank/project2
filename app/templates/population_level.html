@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block app_content %}
   <h2>Population Levels Vs. Project Success Rate</h2>
-  <div id="pop-chart"></div>
-  <br>
+  <div class="row">
+    <div class="col">
+    <div id="pop-chart"></div>
+    </div>
+    </div>
+  <div class="row">
+    <div class="col">
   This visualization compares the population levels for each country
   where the World Bank has funded projects, to their success rate. 
   Click on each circle to show a pop up with the country's details.
   The horizontal axis uses a logarithmic scale to allow a better 
   visualization because of the wide range of population levels.  
+  </div>
+  </div>
 {% endblock %}

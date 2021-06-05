@@ -34,7 +34,7 @@ var stats_url = "/api/v1.0/summary";
     // Step 1: Filter 0-project countries and
     // Parse Data/Cast as numbers
     // ==============================
-    statsData = statsData.filter(country=>country.total > 0);  
+    statsData = statsData.filter(country=>country.total > 0 && country.cpi > 0);  
     statsData.forEach(function(data) {
       data.cpi = +data.cpi;
     });
